@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Enums\RoleEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class ChangeUserRole extends FormRequest
 {
@@ -12,7 +13,7 @@ class ChangeUserRole extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('admin-action');
     }
 
     /**

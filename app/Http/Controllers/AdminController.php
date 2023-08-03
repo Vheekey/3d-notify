@@ -24,12 +24,14 @@ class AdminController extends Controller
     public function changeUserRole(ChangeUserRole $request)
     {
         $roleChanged = User::where('email', $request->email)
-            ->update(['role', $request->newRole]);
+            ->update(['role' => $request->newRole]);
 
         if ($roleChanged) {
-            response()->json([
+            return response()->json([
                 "message" => "Successfully changed role of user {$request->email}"
             ]);
         }
+
+        return response()->json(['message' => "Update Failed"], 400);
     }
 }

@@ -19,12 +19,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('create-token', [AdminController::class, 'createToken']);
 
-Route::post('change-role', [AdminController::class, 'changeUserRole']);
 
-Route::middleware('auth:sanctum')->prefix('notification')->group(function () {
-    Route::post('create', [NotificationController::class, 'createNotification']);
-    Route::get('read-update/{notification}', [NotificationController::class, 'readUpdateNotification']);
-    Route::get('read', [NotificationController::class, 'readNotifications']);
-    Route::post('update/{notification}', [NotificationController::class, 'updateNotification']);
-    Route::delete('delete/{notification}', [NotificationController::class, 'deleteNotification']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::put('change-role', [AdminController::class, 'changeUserRole']);
+
+    Route::prefix('notification')->group(function () {
+        Route::post('create', [NotificationController::class, 'createNotification']);
+        Route::get('read-update/{notification}', [NotificationController::class, 'readUpdateNotification']);
+        Route::get('read', [NotificationController::class, 'readNotifications']);
+        Route::post('update/{notification}', [NotificationController::class, 'updateNotification']);
+        Route::delete('delete/{notification}', [NotificationController::class, 'deleteNotification']);
+    });
+
 });
