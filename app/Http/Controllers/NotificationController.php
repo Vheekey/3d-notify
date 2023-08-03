@@ -6,6 +6,7 @@ use App\Http\Requests\CreateNotification;
 use App\Models\User;
 use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Notification;
 
 class NotificationController extends Controller
@@ -19,18 +20,37 @@ class NotificationController extends Controller
         return response()->json(['message' => 'Notification Scheduled']);
     }
 
-    public function readNotification()
+    public function readNotifications(): \Illuminate\Http\JsonResponse
     {
+        $notifications = auth()->user()->notifications->all();
 
+        return response()->json([
+            'message' => "All Notifications",
+            'data' => $notifications
+        ]);
     }
 
-    public function updateNotification()
+    public function readUpdateNotification(DatabaseNotification $notification): \Illuminate\Http\JsonResponse
     {
+        $this->updateNotification($notification);
 
+        return response()->json([
+            'message' => "Notification Marked as Read",
+            'data' => $notification
+        ]);
     }
 
-    public function deleteNotification()
+    public function updateNotification(DatabaseNotification $notification)
     {
+        $notification->update(['read_at' => now()]);
+    }
 
+    public function deleteNotification(DatabaseNotification $notification)
+    {
+        $notification->delete();
+
+        return response()->json([
+            'message' => "Notification Deleted Successfully",
+        ]);
     }
 }
