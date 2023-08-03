@@ -16,5 +16,3 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Login::class)->name('login');
-Route::get('/new-user', Register::class)->name('register');
-Route::get('/forgot-password', Register::class)->name('forgot-password');

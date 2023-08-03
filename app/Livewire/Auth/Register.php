@@ -20,7 +20,7 @@ class Register extends Component
     public function render()
     {
         return view('livewire.auth.register')
-            ->layout('layouts.home');
+            ->layout('layouts.index');
     }
 
     public function register()
@@ -29,8 +29,8 @@ class Register extends Component
 
         $newUser = User::create([
             'name' => $this->name,
-            'email' => $this->newEmail,
-            'password' => bcrypt($this->newPassword),
+            'email' => $this->email,
+            'password' => bcrypt($this->password),
         ]);
 
         if ($newUser){

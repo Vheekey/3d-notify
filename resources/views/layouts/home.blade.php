@@ -1,3 +1,4 @@
+@php use App\Enums\RoleEnum; @endphp
 @extends('layouts.base')
 
 @section('header')
@@ -5,20 +6,14 @@
 @endsection
 
 @section('content')
-    <div class="card text-center mt-5">
+    <div>
 
-        @include('layouts.auth-header')
+        @include('layouts.headers.common-header')
 
-        <div class="card-body gy-2 gx-3 align-items-center">
-
-            <div class="tab-content">
-                <livewire:auth.login/>
-                <livewire:auth.register/>
-                <livewire:auth.forgot-password/>
-            </div>
-
-            <div class="card-footer text-muted">
-            </div>
+        <div class="row mt-5">
+            @if(auth()->user()->role == RoleEnum::Admin->value)
+                <livewire:admin.notify/>
+            @endif
 
         </div>
 

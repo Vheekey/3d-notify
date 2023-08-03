@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::post('create-token', [AdminController::class,'createToken']);
+
+Route::post('change-role', [AdminController::class,'changeUserRole']);
+
+Route::middleware('auth:sanctum')->prefix('notification')->group(function (){
+    Route::post('create', [NotificationController::class,'createNotification']);
+    Route::post('read', [NotificationController::class,'readNotification']);
+    Route::post('update', [NotificationController::class,'updateNotification']);
+    Route::post('delete', [NotificationController::class,'deleteNotification']);
 });
