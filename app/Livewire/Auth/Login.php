@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Auth;
 
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Login extends Component
@@ -10,7 +12,7 @@ class Login extends Component
     public string $email;
 
     protected array $rules = [
-        'password' => 'required|min:6',
+        'password' => 'required|string|min:6',
         'email' => 'required|email:dns|exists:users,email',
     ];
 
@@ -24,12 +26,7 @@ class Login extends Component
     {
         $validated = $this->validate();
 
-//        $credentials = [
-//            'email' => $this->email,
-//            'password' => $this->password
-//        ];
-
-        if (Auth::attempt($this->validated())) {
+        if (Auth::attempt($validated)) {
             session()->flash('message', 'Successful Login');
 
             return $this->redirect(RouteServiceProvider::HOME);

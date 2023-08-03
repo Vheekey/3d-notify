@@ -1,4 +1,4 @@
-<div wire:ignore.self wire:key="ecpr-{{uniqid()}}" id="forgot" class="row gy-2 tab-pane fade">
+<div wire:ignore.self id="forgot" class="row gy-2 tab-pane fade">
     @include('layouts.notify')
 
     <div class="col-md-6 offset-md-3 mb-3 gy-2 gx-3">

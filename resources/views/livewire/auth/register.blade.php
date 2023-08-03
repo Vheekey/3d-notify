@@ -10,14 +10,19 @@
             @csrf
 
             <div class="mb-3">
+                <label for="name" class="form-label"> Name </label>
+                <input type="text" wire:model="name" class="form-control" width="">
+                @error('name') <span class="error text-danger">{{ $message }}</span> @enderror
+            </div>
+            <div class="mb-3">
                 <label for="email" class="form-label"> Email </label>
-                <input type="text" wire:model="resetEmail" class="form-control" width="">
-                @error('newEmail') <span class="error text-danger">{{ $message }}</span> @enderror
+                <input type="text" wire:model="email" class="form-control" width="">
+                @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label"> Password </label>
-                <input type="text" wire:model="newPassword" class="form-control" width="">
-                @error('newPassword') <span class="error text-danger">{{ $message }}</span> @enderror
+                <input type="password" wire:model="password" class="form-control" width="">
+                @error('password') <span class="error text-danger">{{ $message }}</span> @enderror
             </div>
 
             <div class="d-grid gap-2">
